@@ -9,12 +9,11 @@ var app = express()
 //     cert: fs.readFileSync('./cert/cert.pem')
 //   };
 
-
-
 const server = app.listen(9000);
 
 const peerServer = ExpressPeerServer(server, {
-    path: '/'
-  });
+    path: '/',
+    proxied: true
+});
 
 app.use('/peerjs', peerServer);
