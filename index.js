@@ -1,12 +1,17 @@
 const PORT = process.env.PORT || 9000;
-var fs = require('fs');
-var PeerServer = require('peer').PeerServer;
+const express = require('express');
+const { ExpressPeerServer } = require('peer');
 
-var server = PeerServer({
-    port: PORT,
-    path: '/peerjs',
-    ssl: {
-        key: fs.readFileSync('./cert/key.pem', 'utf8'),
-        cert: fs.readFileSync('./cert/cert.pem', 'utf8')
-    }
+const app = express();
+
+const http = require('http');
+
+const server = http.createServer(app);
+const peerServer = ExpressPeerServer(server, {
+  debug: true,
+  path: '/peerjs'
 });
+
+app.use('/peerjs', peerServer);
+
+server.listen(PORT);
