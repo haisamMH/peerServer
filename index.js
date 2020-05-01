@@ -1,33 +1,13 @@
-const express = require('express');
-const { ExpressPeerServer } = require('peer');
+const express = require('express')
+const PORT = process.env.PORT || 9000
 
-const app = express();
+var app = express()
+//var provisioning = require('./modules/provisioning');
 
-app.get('/', (req, res, next) => res.send('Hello world!'));
+app.use('/', (req,res)=>{
+    res.json({'hi':true})
+}); 
 
-// =======
-
-// const server = app.listen(9000);
-
-// const peerServer = ExpressPeerServer(server, {
-//   debug: true,
-//   path: '/myapp'
-// });
-
-// app.use('/peerjs', peerServer);
-
-// == OR ==
-
-// const https = require('https');
-
-// const server = https.createServer(app);
-// const peerServer = ExpressPeerServer(server, {
-//   debug: true,
-//   path: '/myapp'
-// });
-
-// app.use('/peerjs', peerServer);
-
-// server.listen(9000);
-
-// ========
+app.listen(PORT, () => {
+ console.log("Server started listening on port :"+ PORT );
+});
