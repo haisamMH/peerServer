@@ -1,12 +1,7 @@
-const https = require('https');
-const fs = require('fs');
+var fs = require('fs');
+var PeerServer = require('peer').PeerServer;
 
-const options = {
-  key: fs.readFileSync('./cert/key.pem'),
-  cert: fs.readFileSync('./cert/cert.pem')
-};
-
-https.createServer(options, function (req, res) {
-  res.writeHead(200);
-  res.end("hello world\n");
-}).listen(9000);
+var server = PeerServer({
+    port: 9000,
+    path: '/peerjs'
+});
