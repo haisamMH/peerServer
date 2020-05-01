@@ -18,16 +18,16 @@ app.use('/peerjs', peerServer);
 
 // == OR ==
 
-const https = require('https');
+// const https = require('https');
 
-const server = https.createServer(app);
-const peerServer = ExpressPeerServer(server, {
-  debug: true,
-  path: '/myapp'
-});
+// const server = https.createServer(app);
+// const peerServer = ExpressPeerServer(server, {
+//   debug: true,
+//   path: '/myapp'
+// });
 
-app.use('/peerjs', peerServer);
+// app.use('/peerjs', peerServer);
 
-server.listen(9000);
+// server.listen(9000);
 
 // ========
