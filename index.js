@@ -1,19 +1,12 @@
-const express = require('express')
-const PORT = process.env.PORT || 9000
-const { ExpressPeerServer } = require('peer');
+const https = require('https');
+const fs = require('fs');
 
-var app = express()
+const options = {
+  key: fs.readFileSync('./cert/key.pem'),
+  cert: fs.readFileSync('./cert/cert.pem')
+};
 
-// const options = {
-//     key: fs.readFileSync('./cert/key.pem'),
-//     cert: fs.readFileSync('./cert/cert.pem')
-//   };
-
-const server = app.listen(9000);
-
-const peerServer = ExpressPeerServer(server, {
-    path: '/',
-    proxied: true
-});
-
-app.use('/peerjs', peerServer);
+https.createServer(options, function (req, res) {
+  res.writeHead(200);
+  res.end("hello world\n");
+}).listen(9000);
