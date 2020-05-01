@@ -1,13 +1,20 @@
 const express = require('express')
 const PORT = process.env.PORT || 9000
+const { ExpressPeerServer } = require('peer');
 
 var app = express()
-//var provisioning = require('./modules/provisioning');
 
-app.use('/', (req,res)=>{
-    res.json({'hi':true})
-}); 
+// const options = {
+//     key: fs.readFileSync('./cert/key.pem'),
+//     cert: fs.readFileSync('./cert/cert.pem')
+//   };
 
-app.listen(PORT, () => {
- console.log("Server started listening on port :"+ PORT );
-});
+
+
+const server = app.listen(9000);
+
+const peerServer = ExpressPeerServer(server, {
+    path: '/'
+  });
+
+app.use('/peerjs', peerServer);
