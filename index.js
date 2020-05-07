@@ -5,6 +5,7 @@ var fs = require('fs')
 var server = PeerServer({
     port: PORT,
     path: '/peerjs',
+    expire_timeout: 10000,
     ssl: {
         key: fs.readFileSync('./key.pem', 'utf8'),
         cert: fs.readFileSync('./cert.pem', 'utf8')
